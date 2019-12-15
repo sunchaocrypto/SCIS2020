@@ -500,10 +500,13 @@ The following theorem is the uniform case for bounding uninvertibility.
           \sum_{y \in f(X)} \frac{\left|f^{-1}(y)\right|}{|X|} \cdot \frac{1}{\left|f^{-1}(y)\right|}=\frac{|f(X)|}{|X|}
         \end{gather*}
     \end{proof}
-However, if applying this proof to non-uniform input distribution, things become more complicated. Since we can't do 
-more assumptions for the function $f$,
+However, if applying this proof to non-uniform input distribution, things become more complicated. Since the input distribution is 
+not uniform, the adversary can always output the preimage with the maximum conditional probability.
+The success probability is bounded by 
+
 \subsection{Second Preimage Resistance}
 \begin{theorem}
+  \label{thm:secondpreimage}
   For any integers $m, k, q, s$ and set $X \subset [s]^{m}$, the function family SIS$(m, k, q)$ is 
   (statistically) $\epsilon$-second preimage resistant with respect to the non-uniform distribution $N(X)$
   for $\epsilon = |X|\cdot (s'/q)^{k}$, where $s'$ is the largest factor of $q$ smaller than $s$.
@@ -532,10 +535,32 @@ Then $\mathcal{F} = $ SIS$(m, m - n, q)$ is one-way with respect to input distri
 \end{theorem}
 \begin{proof}
   Here we construct a lossy function family where $\mathcal{F} = $ SIS$(m, m - n, q)$ and 
-  $\mathcal{L} = $SIS$(l, m - n, q)$ $\circ$ $\mathcal{I}(m, l, \mathcal{Y})$.
+  $\mathcal{L} = $SIS$(l, m - n, q)$ $\circ$ $\mathcal{I}(m, l, \mathcal{Y})$. 
+  In order to prove ($\mathcal{L}$,$\mathcal{F},\mathcal{X}$) is a lossy function family, we need to prove three things:
+  \begin{itemize}
+    \item $\mathcal{L}$ and $\mathcal{F}$ is indistinguishable.
+    \item ($\mathcal{L}$, $\mathcal{X}$) is uninvertible.
+    \item ($\mathcal{F}$, $\mathcal{X})$ is second-preimage resistant.
+  \end{itemize}
+First, we prove the indistinguishability of $\mathcal{L}$ and $\mathcal{F}$.
+Suppose there is an adversary $\mathcal{A}$ that can distinguish $\mathcal{L}$ and $\mathcal{F}$ with advantage $\epsilon$.
+Let $U(\mathbb{Z}^{m - n})$ denote the uniform distribution over $\mathbb{Z}^{m - n}$, 
+
+Secondly, 
+
+Thirdly, the second-preimage resistance of ($\mathcal{F}$, $\mathcal{X})$ is proved by 
+Theorem~\ref{thm:secondpreimage}.
+Thus, we prove that ($\mathcal{L}$, $\mathcal{F}, \mathcal{X}$) is a lossy function family.
+By using Theorem~\ref{thm:lossyfunction}, we prove that 
+$\mathcal{F} = $ SIS$(m, m - n, q)$ is one-way with respect to input distribution $\mathcal{X}$. 
 \end{proof}
+\subsection{Instantiation}
 \section{Conclusion}
-Assuming semi-regularity, we get a concrete time analysis for Binary-Error LWE. The trade-off between time and samples can help us understand the hardness of Binary-Error LWE better. Hence, when building cryptographic schemes, we should consider the relation between time complexity and sample complexity before choosing security parameters. 
+In this paper, we analyze the hardness of LWE with non-uniform binary error. On one hand, we 
+show some attacks against LWE when the error rate is low. On the other hand, when the 
+error rate is a constant, we reduce it to standard LWE, as long as the number of samples 
+is strongly restricted.
+
 %\begin{thebibliography}{9}
 %\bibitem{a}
 %Authors, ``Title,'' {\em Journal}, Pages, etc...
