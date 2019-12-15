@@ -1,0 +1,57 @@
+\begin{thebibliography}{1}
+
+\bibitem{albrecht2015concrete}
+Martin~R Albrecht, Rachel Player, and Sam Scott.
+\newblock On the concrete hardness of learning with errors.
+\newblock {\em Journal of Mathematical Cryptology}, 9(3):169--203, 2015.
+
+\bibitem{arora2011new}
+Sanjeev Arora and Rong Ge.
+\newblock New algorithms for learning in presence of errors.
+\newblock In {\em International Colloquium on Automata, Languages, and
+  Programming}, pages 403--415. Springer, 2011.
+
+\bibitem{buchmann2016high}
+Johannes Buchmann, Florian G{\"o}pfert, Tim G{\"u}neysu, Tobias Oder, and
+  Thomas P{\"o}ppelmann.
+\newblock High-performance and lightweight lattice-based public-key encryption.
+\newblock In {\em Proceedings of the 2nd ACM International Workshop on IoT
+  Privacy, Trust, and Security}, pages 2--9. ACM, 2016.
+
+\bibitem{dottling2013lossy}
+Nico D{\"o}ttling and J{\"o}rn M{\"u}ller-Quade.
+\newblock Lossy codes and a new variant of the learning-with-errors problem.
+\newblock In {\em Annual International Conference on the Theory and
+  Applications of Cryptographic Techniques}, pages 18--34. Springer, 2013.
+
+\bibitem{le2014powers}
+Fran{\c{c}}ois Le~Gall.
+\newblock Powers of tensors and fast matrix multiplication.
+\newblock In {\em Proceedings of the 39th international symposium on symbolic
+  and algebraic computation}, pages 296--303. ACM, 2014.
+
+\bibitem{lyubashevsky2010ideal}
+Vadim Lyubashevsky, Chris Peikert, and Oded Regev.
+\newblock On ideal lattices and learning with errors over rings.
+\newblock In {\em Annual International Conference on the Theory and
+  Applications of Cryptographic Techniques}, pages 1--23. Springer, 2010.
+
+\bibitem{micciancio2011pseudorandom}
+Daniele Micciancio and Petros Mol.
+\newblock Pseudorandom knapsacks and the sample complexity of lwe
+  search-to-decision reductions.
+\newblock In {\em Annual Cryptology Conference}, pages 465--484. Springer,
+  2011.
+
+\bibitem{micciancio2013hardness}
+Daniele Micciancio and Chris Peikert.
+\newblock Hardness of sis and lwe with small parameters.
+\newblock In {\em Advances in Cryptology--CRYPTO 2013}, pages 21--39. Springer,
+  2013.
+
+\bibitem{regev2010learning}
+Oded Regev.
+\newblock The learning with errors problem.
+\newblock {\em Invited survey in CCC}, 7, 2010.
+
+\end{thebibliography}

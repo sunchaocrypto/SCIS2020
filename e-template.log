@@ -1,0 +1,287 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.5.25)  15 DEC 2019 13:09
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"/Users/admin/Desktop/SCIS 2020/e-template.tex"
+(/Users/admin/Desktop/SCIS 2020/e-template.tex
+LaTeX2e <2018-04-01> patch level 2
+Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2018/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count80
+\c@section=\count81
+\c@subsection=\count82
+\c@subsubsection=\count83
+\c@paragraph=\count84
+\c@subparagraph=\count85
+\c@figure=\count86
+\c@table=\count87
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+) (/Users/admin/Desktop/SCIS 2020/scis2020e.sty
+scis2020e.sty: 2019/10/1
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2017/09/02 v2.17a AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+ (/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks14
+\ex@=\dimen103
+)) (/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen104
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count88
+LaTeX Info: Redefining \frac on input line 213.
+\uproot@=\count89
+\leftroot@=\count90
+LaTeX Info: Redefining \overline on input line 375.
+\classnum@=\count91
+\DOTSCASE@=\count92
+LaTeX Info: Redefining \ldots on input line 472.
+LaTeX Info: Redefining \dots on input line 475.
+LaTeX Info: Redefining \cdots on input line 596.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen105
+LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+\macc@depth=\count93
+\c@MaxMatrixCols=\count94
+\dotsspace@=\muskip10
+\c@parentequation=\count95
+\dspbrk@lvl=\count96
+\tag@help=\toks15
+\row@=\count97
+\column@=\count98
+\maxfields@=\count99
+\andhelp@=\toks16
+\eqnshift@=\dimen106
+\alignsep@=\dimen107
+\tagshift@=\dimen108
+\tagwidth@=\dimen109
+\totwidth@=\dimen110
+\lineht@=\dimen111
+\@envbody=\toks17
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks18
+LaTeX Info: Redefining \[ on input line 2817.
+LaTeX Info: Redefining \] on input line 2818.
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2018/04/06 v1.3b Input encoding file
+\inpenc@prehook=\toks19
+\inpenc@posthook=\toks20
+) (/usr/local/texlive/2018/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2018/02/14 3.18 The Babel package
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/babel/switch.def
+File: switch.def 2018/02/14 3.18 Babel switching mechanism
+) (/usr/local/texlive/2018/texmf-dist/tex/generic/babel-english/english.ldf
+Language: english 2017/06/06 v3.3r English support from the babel system
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2018/02/14 3.18 Babel common definitions
+\babel@savecnt=\count100
+\U@D=\dimen112
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/babel/txtbabel.def)
+\bbl@dirlevel=\count101
+)
+\l@canadian = a dialect from \language\l@american 
+\l@australian = a dialect from \language\l@british 
+\l@newzealand = a dialect from \language\l@british 
+)) (/usr/local/texlive/2018/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2017/10/31 v2.20.4
+\thm@style=\toks21
+\thm@bodyfont=\toks22
+\thm@headfont=\toks23
+\thm@notefont=\toks24
+\thm@headpunct=\toks25
+\thm@preskip=\skip46
+\thm@postskip=\skip47
+\thm@headsep=\skip48
+\dth@everypar=\toks26
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/listings.sty (/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks27
+)
+\lst@mode=\count102
+\lst@gtempboxa=\box28
+\lst@token=\toks28
+\lst@length=\count103
+\lst@currlwidth=\dimen113
+\lst@column=\count104
+\lst@pos=\count105
+\lst@lostspace=\dimen114
+\lst@width=\dimen115
+\lst@newlines=\count106
+\lst@lineno=\count107
+\lst@maxwidth=\dimen116
+ (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count108
+\lst@skipnumbers=\count109
+\lst@framebox=\box29
+) (/usr/local/texlive/2018/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+ (/usr/local/texlive/2018/texmf-dist/tex/generic/systeme/systeme.sty (/usr/local/texlive/2018/texmf-dist/tex/generic/xstring/xstring.sty (/usr/local/texlive/2018/texmf-dist/tex/generic/xstring/xstring.tex
+\@xs@message=\write3
+\integerpart=\count110
+\decimalpart=\count111
+)
+Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
+) (/usr/local/texlive/2018/texmf-dist/tex/generic/systeme/systeme.tex
+\SYS@systemecode=\toks29
+\SYS@systempreamble=\toks30
+\SYSeqnum=\count112
+)
+Package: systeme 2018/01/01 v0.31 Mise en forme de systemes d'equations (CT)
+)
+\c@definition=\count113
+\c@remark=\count114
+ (/Users/admin/Desktop/SCIS 2020/e-template.aux)
+\openout1 = `e-template.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 29.
+LaTeX Font Info:    ... okay on input line 29.
+\c@lstlisting=\count115
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 87.
+ (/usr/local/texlive/2018/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 87.
+
+Overfull \hbox (0.79999pt too wide) in paragraph at lines 87--87
+[]|[]| 
+ []
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 87.
+(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 87.
+ (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+Underfull \hbox (badness 1960) in paragraph at lines 87--87
+[] |[]\OT1/cmr/m/n/8 Kyoto Uni-ver-sity, Ky-oto, Japan (sun.chao.46s@st.kyoto-
+ []
+
+[1{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+
+]
+Overfull \hbox (3.95418pt too wide) in paragraph at lines 214--216
+\OT1/cmr/bx/n/10 Definition 2.2 \OT1/cmr/m/n/10 (Bi-na-ry-Er-ror LWE)\OT1/cmr/bx/n/10 . \OT1/cmr/m/n/10 The Binary-Error
+ []
+
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 236.
+
+Overfull \hbox (50.99014pt too wide) detected at line 250
+[]
+ []
+
+\c@theorem=\count116
+
+Overfull \hbox (21.15024pt too wide) in paragraph at lines 286--292
+[]\OT1/cmr/m/n/10 The Short In-te-ger So-lu-tion func-tion fam-ily SIS$(\OML/cmm/m/it/10 m; n; q; X\OT1/cmr/m/n/10 )$
+ []
+
+[2]
+Overfull \hbox (9.9754pt too wide) in paragraph at lines 378--381
+[]\OT1/cmr/m/n/10 More pre-cisely, solv-ing an in-stance $(\OML/cmm/m/it/10 A; \OT1/cmr/bx/n/10 b\OT1/cmr/m/n/10 )$ of the Binary-
+ []
+
+
+Overfull \hbox (7.14076pt too wide) in paragraph at lines 386--389
+\OT1/cmr/m/n/10 which is a quadratic equa-tion in the co-ef-fi-cients $\OML/cmm/m/it/10 s[]; [] ; s[]$
+ []
+
+
+Overfull \hbox (18.70619pt too wide) in paragraph at lines 404--413
+\OT1/cmr/m/n/10 like prob-lems of-ten have a pub-lic key con-sist-ing of $\OML/cmm/m/it/10 O\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 n [] q\OT1/cmr/m/n/10 )$
+ []
+
+[3]
+Overfull \hbox (2.17874pt too wide) in paragraph at lines 444--446
+\OT1/cmr/m/n/10 uniform binary-error LWE with er-ror rate $\OML/cmm/m/it/10 p \OT1/cmr/m/n/10 = 1\OML/cmm/m/it/10 =n[]$\OT1/cmr/m/n/10 ($0 \OML/cmm/m/it/10 <
+ []
+
+
+Overfull \hbox (14.95587pt too wide) in paragraph at lines 469--470
+[]\OT1/cmr/m/n/10 Use the above three prop-er-ties to show that $(\OMS/cmsy/m/n/10 L\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 F\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 X\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (6.71034pt too wide) in paragraph at lines 474--477
+\OT1/cmr/m/n/10 LWE$(\OML/cmm/m/it/10 m; n; q\OT1/cmr/m/n/10 )$ and SIS$(\OML/cmm/m/it/10 m; m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 n; q\OT1/cmr/m/n/10 )$ to prove LWE$(\OML/cmm/m/it/10 m; n; q\OT1/cmr/m/n/10 )$
+ []
+
+
+Overfull \hbox (0.41988pt too wide) in paragraph at lines 474--477
+\OT1/cmr/m/n/10 the same) [[]], which di-rectly re-duces Binary-Error LWE
+ []
+
+
+Overfull \hbox (4.50336pt too wide) in paragraph at lines 489--492
+\OT1/cmr/m/n/10 sta-tis-ti-cally, with re-spect to com-pu-ta-tion-ally un-bounded
+ []
+
+[4] (/Users/admin/Desktop/SCIS 2020/e-template.bbl
+Underfull \hbox (badness 8151) in paragraph at lines 15--20
+[]\OT1/cmr/m/n/10 Johannes Buch-mann, Flo-rian G^^?opfert, Tim
+ []
+
+
+Underfull \hbox (badness 2368) in paragraph at lines 15--20
+\OT1/cmr/m/n/10 G^^?uneysu, To-bias Oder, and Thomas P^^?oppel-
+ []
+
+) [5] (/Users/admin/Desktop/SCIS 2020/e-template.aux) )
+(\end occurred when \if on line 266 was incomplete) 
+Here is how much of TeX's memory you used:
+ 3355 strings out of 492649
+ 45756 string characters out of 6129622
+ 134231 words of memory out of 5000000
+ 7215 multiletter control sequences out of 15000+600000
+ 12169 words of font info for 47 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 27i,12n,32p,395b,242s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on "/Users/admin/Desktop/SCIS 2020/e-template.pdf" (5 pages, 246843 bytes).
+PDF statistics:
+ 100 PDF objects out of 1000 (max. 8388607)
+ 72 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

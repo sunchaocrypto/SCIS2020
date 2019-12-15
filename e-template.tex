@@ -1,0 +1,739 @@
+% SCIS 2019 English manuscript (for LaTeX2e)
+\documentclass[a4paper]{article}
+\usepackage{scis2020e}
+\usepackage{amsmath,amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{listings}
+\usepackage{systeme}
+ 
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}[section]
+% If you use LaTeX 2.09, delete the above two lines and remove '%' below.
+%\documentstyle[scis2019e]{jarticle}
+% If you use LaTeX 2.09, delete the above two lines and remove '%' below.
+%\documentstyle[scis2019e]{jarticle}
+
+\DeclareMathOperator{\poly}{poly}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\vec}{\mathbf}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+
+\begin{document}
+
+\title{
+  On the hardness of LWE with Non-uniform Binary Error    %The title of this paper
+}
+\author{
+  Sun Chao            %The name of the first author
+  \thanks{
+ Kyoto University, Kyoto, Japan   %The affiliation and address of the first author
+    (sun.chao.46s@st.kyoto-u.ac.jp)
+  }
+  \and
+  Mehdi Tibouchi           %The name of the second author
+  \thanks{ %If this is same as the first author, write \samethanks{1}.
+     NTT Secure Platform Laboratories , Tokyo, Japan  %The affiliation and address of the second author
+  }
+    \and
+  Masayuki Abe           %The name of the second author
+  \thanks{ %If this is same as the first author, write \samethanks{1}.
+     NTT Secure Platform Laboratories , Tokyo, Japan  %The affiliation and address of the second author
+  }
+}
+\abstract{
+ Binary-Error LWE is the particular case of the learning with errors
+problem in which errors are chosen from $\{0,1\}$.
+% It has various
+%cryptographic applications, and in particular, has been used to construct
+%efficient encryption schemes for use in constrained devices.
+%
+For uniform case, Arora and Ge
+showed that the problem can be solved in polynomial time given a number
+of samples quadratic in the dimension $n$, and it can also be solved in 
+subexponential time given a superlinear number of samples, by
+applying Gr\"{o}bner basis techniques to the system arising from Arora
+and Ge's approach. On the other hand, Micciancio and Peikert showed the
+Uniform Binary-Error LWE problem reduces to standard LWE (and thus is believed to
+be exponentially hard) when the number of samples is restricted to $n +
+O(n/\log n)$. 
+In this paper, we examine more generally about the hardness of the non-uniform 
+Binary-Error LWE and how it varies with the error rate and the number of available samples.
+In particular, we show that, when error rate is low, non-uniform 
+Binary-Error LWE can be solved in polynomial time given $O(n)$ samples, and when 
+the error rate is slightly higher, it can solved in subexponential time with $O(n)$ samples.
+Besides, we generalize the hardness proof by Micciancio and Peikert to the non-uniform case.
+%using a simpler (but asymptotically equivalent) variant of the
+%Gr\"{o}bner basis algorithm. In particular, under standard heuristics on
+%the Arora-Ge polynomial system, we show that, for any $\epsilon >0$,
+%Binary-Error LWE can be solved in polynomial time
+%$n^{O(1/\epsilon)}$ given $\epsilon\cdot n^{2}$ samples. Similarly,
+%it can be solved in subexponential time $2^{\tilde O(n^{1-\alpha})}$ given
+%$n^{1+\alpha}$ samples, for $0<\alpha<1$. It is also easy to derive
+%concrete complexity estimates for any given set of parameters, so as to
+%evaluate the security of cryptographic schemes based on Binary-Error LWE.
+}
+
+\keywords{LWE, Binary-Error LWE, Lossy Function Family, Arora-Ge algorithm,
+Time complexity, Reduction}
+
+\maketitle
+
+\section{Introduction}
+
+The learning with errors problem (LWE), introduced by Regev in
+2005~\cite{regev2010learning}, is one of the central problems of
+lattice-based cryptography. It can be seen as an average-case problem
+which, for suitable parameters, is as hard as worst-case lattice
+problems, and it is therefore very convenient to build secure
+lattice-based cryptographic schemes: it has been used to build various
+primitives from encryption and signatures all the way to
+fully-homomorphic encryption.
+
+For efficiency reasons, constructions often rely on variants of LWE (such
+as its ring version Ring-LWE~\cite{lyubashevsky2010ideal}) or
+instantiations in more aggressive ranges of parameters than those for
+which Regev's reduction to worst-case lattice problems holds. An
+important example is \emph{Binary-Error LWE}, where the error term is
+sampled uniformly from $\{0,1\}$ (instead of from a wider discrete
+Gaussian distribution). Binary-Error LWE is a particularly simple
+problem with various interesting cryptographic applications, such as
+Buchmann et al.'s efficient lattice-based encryption scheme for IoT and
+lightweight devices~\cite{buchmann2016high} (based on the ring version of
+Binary-Error LWE, with the additional constraint that the secret is
+binary as well).
+
+However, the problem is not hard given arbitrarily many samples: in fact,
+an algebraic attack due to Arora and Ge~\cite{arora2011new} solves
+uniform Binary-Error LWE in polynomial time given around $n^2/2$ samples. The
+same approach can also be combined by Gr\"obner basis techniques to
+reduce the number of required samples~\cite{albrecht2015concrete}. On the other hand,
+Micciancio and Peikert~\cite{micciancio2013hardness} showed the
+Binary-Error LWE problem reduces to standard LWE (and thus is believed to
+be exponentially hard) when the number of samples is restricted to $n +
+O(n/\log n)$. Thus, the hardness of Binary-Error LWE crucially depends on
+the number of samples released to the adversary.
+
+In this paper, we make a generalization of the uniform Binary-Error LWE to the non-uniform case,
+in which the error is chosen from $\{0,1\}$ and the error is 1 with some probability $p$.
+We analyze this problem from two perspectives. On one hand, when the error rate is $p = O(1/n)$,
+it can be solved in polynomial time with $O(n)$ samples, and when the error rate is $p = O(1/n^{\alpha})$ ($0 < \alpha < 1$),
+it can be solved in subexponential time with $O(n)$ samples. On the other hand, we generalize the hardness proof 
+given by Micciancio and Peikert. In particular, we show that non-uniform Binary-Error LWE with any constant error rate reduces to 
+standard LWE, as long as the number of samples is restricted.
+\iffalse
+Binary-Error LWE with constant is as hard as 
+
+In this paper, we show that a simple extension of the Arora-Ge attack
+(based on similar ideas as the Gr\"obner basis approach, but simpler and
+at least as fast) provides a smooth time-sample trade-off for
+Binary-Error LWE: the attack can tackle any number of samples, with
+increasing complexity as the number of samples decreases. In particular,
+for Binary-Error LWE with $\epsilon\cdot n^2$ samples ($\epsilon>0$
+constant), we obtain an attack in polynomial time $n^{O(1/\epsilon)}$,
+assuming standard heuristics on the polynomial system arising from the
+Arora-Ge approach. Similarly, for $n^{1+\alpha}$ samples
+($\alpha\in(0,1)$ constant), we obtain an attack in subexponential time
+$2^{\tilde O(n^{1-\alpha})}$. The precise complexity for any concrete
+number of samples is also easy to compute, which makes it possible to
+precisely set parameters for cryptographic schemes based on Binary-Error
+LWE.
+\fi
+\section{Preliminaries}
+
+\subsection{Learning with Errors}
+
+The LWE problem asks to recover a secret $\vec s\in\F_q^n$, given a
+system of linear approximate equations. For instance,
+\begin{align*}
+14 s_1 + 15 s_2 +  5 s_3 +  2 s_4 &\approx  8 \pmod{17} \\
+13 s_1 + 14 s_2 + 14 s_3 +  6 s_4 &\approx 16 \pmod{17} \\
+ 6 s_1 + 10 s_2 + 13 s_3 +    s_4 &\approx  3 \pmod{17} \\
+10 s_1 +  4 s_2 + 12 s_3 + 16 s_4 &\approx 12 \pmod{17} \\
+ 9 s_1 +  5 s_2 +  9 s_3 +  6 s_4 &\approx  9 \pmod{17} \\
+ 3 s_1 +  6 s_2 +  4 s_3 +  5 s_4 &\approx 16 \pmod{17} 
+\end{align*}
+Each equation is satisfied up to some small error, sampled independently
+according to some known distribution (typically a discrete Gaussian
+distribution). The goal is to recover the secret $\vec s$. If the
+equation held without error, finding $\vec s$ would simply amount to
+solving a system of linear equations. We could therefore recover the
+secret $\vec s$ in polynomial time $O(n^\omega)$, where $2\leq\omega\leq
+3$ is the complexity exponent of linear algebra ($\omega\approx 2.37$
+using the best known approach~\cite{le2014powers}). However, the errors
+introduced in LWE typically make the problem much harder. Formally, the
+LWE problem can be defined as follows.
+
+\begin{definition}[LWE]
+\label{def:lwe}
+The (search) LWE problem, defined with respect to a dimension $n$, a
+modulus $q$ and an error distribution $\chi$ over $\F_q$, asks to recover
+a secret vector $\vec s\in\F_q^n$ given polynomially many samples of the
+form
+\begin{equation}
+\label{eq:lwesamp}
+\big(\vec a, \langle\vec a, \vec s\rangle + e \bmod q\big) \in
+\F_q^n\times \F_q
+\end{equation}
+where $\vec a$ is uniformly random in $\F_q^n$, and $e$ is sampled
+according to $\chi$. One can optionally specify the number $m=\poly(n)$
+of available samples as an additional parameter.
+\end{definition}
+
+\begin{remark}
+One can also similarly define a decision variant of the LWE problem,
+which asks to distinguish the distribution of the
+samples~\eqref{eq:lwesamp} above from the uniform distribution over
+$\F_q^n\times \F_q$.
+
+The LWE problem given $m$ samples has a simple expression in matrix form:
+it asks to recover $\vec s$ from the pair $(A,\vec b)$ where
+$A\in\F_q^{m\times n}$ is a uniformly random matrix, and $\vec b = A\vec
+s + \vec e\bmod q$, where all the coefficients of $\vec e\in \F_q^m$ are
+sampled independently from $\chi$.
+\end{remark}
+
+%\newtheorem{theorem}{Theorem}
+
+
+
+
+\subsection{Binary-Error LWE} 
+
+The Binary-Error LWE is simply the special case of
+Definition~\ref{def:lwe} where $\chi$ is the uniform distribution over
+$\{0,1\}$. In other words:
+\begin{definition}[Binary-Error LWE]
+The Binary-Error LWE with parameters $n$, $m$ and $q$ asks to recover the
+vector $\vec s\in\F_q^n$ from $m$ samples of the form:
+\[
+\big(\vec a, \langle\vec a, \vec s\rangle + e \bmod q\big) \in
+\F_q^n\times \F_q
+\]
+where $\vec a$ is uniformly random in $\F_q^n$, and $e$ is uniform in
+$\{0,1\}$.
+\end{definition} 
+
+The dimension $n$ is the main security parameter, and both $m$ and $q$
+are typically chosen as polynomially bounded functions of $n$. In this
+paper, we assume that $q = n^{\Theta(1)}$.
+
+\subsection{One-Way Functions}
+A function family is a probability distribution $\mathcal{F}$ over a 
+set of functions $\mathcal{F} \subset (X \rightarrow Y)$ with common domain 
+$X$ and range $Y$.
+Let $\mathcal{X}$ be a probability distribution over the domain $X$ of a 
+function family $\mathcal{F}$. We recall the following standard security 
+notions: 
+\begin{itemize}
+  \item ($\mathcal{F}, \mathcal{X}$) is $(t, \epsilon)$-one-way if for all probabilistic algorithms $\mathcal{A}$
+  running in time at most $t$,
+  \begin{gather*}
+    \operatorname{Pr}\left[f \leftarrow \mathcal{F}, x \leftarrow \mathcal{X}: \mathcal{A}(f, f(x)) \in f^{-1}(f(x))\right] \leq \epsilon
+  \end{gather*}
+\item $(\mathcal{F}, \mathcal{X})$ is $(t, \epsilon)$-uninvertible if for all probabilistic algorithms $\mathcal{A}$ 
+running in time at most $t$,
+\begin{gather*}
+  \operatorname{Pr}[f \leftarrow \mathcal{F}, x \leftarrow \mathcal{X}: \mathcal{A}(f, f(x))=x] \leq \epsilon
+\end{gather*}
+\item $(\mathcal{F}, \mathcal{X})$ is $(t, \epsilon)$-second preimage resistant if for all probabilistic algorithms $\mathcal{A}$ 
+running in time at most $t$,
+\begin{gather*}
+  \operatorname{Pr}\left[f \leftarrow \mathcal{F}, x \leftarrow \mathcal{X}, x^{\prime} \leftarrow \mathcal{A}(f, x): f(x)=f\left(x^{\prime}\right) \wedge x \neq x^{\prime}\right] \leq \epsilon
+\end{gather*}
+\item $(\mathcal{F}, \mathcal{X})$ is $(t, \epsilon)$-pseudorandom if the distributions $\{f \leftarrow \mathcal{F}, x \leftarrow \mathcal{X}:(f, f(x))\}$
+and $\{f \leftarrow \mathcal{F}, y \leftarrow \mathcal{U}(Y):(f, y)\}$ are $(t, \epsilon)$-indistinguishable.
+\end{itemize}
+\subsection{Lossy Function Families}
+\begin{definition}[Lossy Function Families~\cite{micciancio2013hardness}]
+  Let ($\mathcal{L}$, $\mathcal{F}$) be two probability distributions(with possbily different supports) over the same set 
+  of (efficiently computable) functions $\mathcal{F} \subset X \rightarrow Y$, and let $\mathcal{X}$ be an efficiently sampleable 
+  distribution over the domain $X$. We say that ($\mathcal{L}$, $\mathcal{F}$, $\mathcal{X}$) is a lossy function family if 
+  the following properties are satisfied:
+  \begin{itemize}
+    \item the distributions $\mathcal{L}$ and $\mathcal{F}$ are indistinguishable.
+    \item ($\mathcal{L}$, $\mathcal{X}$) is uninvertible.
+    \item ($\mathcal{F}$, $\mathcal{X}$) is second preimage resistant.
+  \end{itemize}
+  \newtheorem{theorem}{Theorem}
+  \begin{theorem}~\cite{micciancio2013hardness}
+    \label{thm:lossyfunction}
+    Let $\mathcal{F}$ be a family of functions computable in time $t'$. If $(\mathcal{F}, \mathcal{X})$ is both 
+    $(t, \epsilon)$-uninvertible and $(t + t', \epsilon ')$-second preimage resistant, then it is also 
+    $(t, \epsilon + \epsilon ')$-one-way.
+    \end{theorem}
+  \begin{theorem}~\cite{micciancio2013hardness}
+    Let $\mathcal{F}$ and $\mathcal{F}'$ be any two indistinguishable, efficiently computable function families,
+    and let $\mathcal{X}$ be an efficiently sampleable input distribution. Then if ($\mathcal{F}$, $\mathcal{X}$)
+    is uninvertible(respectively, second-preimage resistant), then ($\mathcal{F}'$, $\mathcal{X}$) is also uninvertible(resp., second
+    preimage resistant). In particular, if ($\mathcal{L}$, $\mathcal{F}$, $\mathcal{X}$) is a lossy function family, then 
+    ($\mathcal{L}$, $\mathcal{X}$) and ($\mathcal{F}$, $\mathcal{X}$) are both one-way.
+  \end{theorem}
+
+    %\begin{proof}
+  %  Let $\mathcal{A}$ be an algorithm running in time at most $t$ and attacking the one-wayness property of $(\mathcal{F}, \mathcal{X})$.
+   % Let 
+  %\end{proof}
+  \end{definition} 
+\subsection{SIS and LWE functions}
+The Short Integer Solution function family SIS$(m,n,q,X)$ is the set of all functions $f_{A}$ indexed 
+by $\mathbf{A} \in \mathbb{Z}_{q}^{n \times m}$ with domain $X \subseteq \mathbb{Z}^{m}$ and range 
+$Y=\mathbb{Z}_{q}^{n}$ defined as $f_{\mathbf{A}}(\mathbf{x})=\mathbf{A} \mathbf{x} \bmod q$. The 
+Learning With Error function family LWE$(m,n,q,X)$ is the set of all functions $g_{A}$ indexed by 
+$\mathbf{A} \in \mathbb{Z}_{q}^{n \times m}$ with domain $\mathbb{Z}_{q}^{n} \times X$ and range 
+$Y=\mathbb{Z}_{q}^{m}$, defined as $g_{\mathbf{A}}(\mathbf{s}, \mathbf{x})=\mathbf{A}^{T} \mathbf{s}+\mathbf{x} \bmod q$
+
+\begin{theorem}~\cite{micciancio2011pseudorandom}
+  \label{thm:sislwe}
+    For any $n, m \ge n + \omega(log n), q,$ and distribution $\mathcal{X}$ over $\mathbb{Z}^{m}$, the LWE(m, n, q) function 
+    family is one-way (resp. pseudorandom, or uninvertible) with respect to input distribution
+     $U(\mathbb{Z}_{q}^{n}) \times \mathcal{X}$ if and only if the SIS(m, m - n, q) function family is one-way(resp. pseudorandom
+     , or uninvertible) with respect to the input distribution $\mathcal{X}$.
+
+\end{theorem}
+%
+\subsection{Uniqueness of solutions}
+%\newtheorem{theorem}{Theorem}
+\begin{theorem}
+\label{thm:uniqueness}
+Suppose that the following condition is satisfied:
+\[ m \geq n\cdot\left(1 + \frac{c}{\log q}\right) \]
+for some $c > \log 3$. Then, the Binary-Error LWE problem with parameters
+$n,m,q$ has a unique solution with overwhelming probability.
+\end{theorem}
+\begin{proof}
+Indeed, suppose that two solutions $\vec s\neq\vec s'$ exist to the
+Binary-Error LWE challenge $(A,\vec b)$. This means that there exists
+binary error vectors $\vec e,\vec e'$ such that:
+\[ \vec b = A\vec s + \vec e = A\vec s' + \vec e'. \]
+As a result, the vector $\vec t = \vec s'-\vec s \neq 0$ satisfies $A\vec t =
+\vec e - \vec e' \in \{-1,0,1\}^m$. It thus suffices to prove that for a
+random $A\in\F_q^{m\times n}$, such a vector $\vec t$ can only exist with
+negligible probability.
+
+We can proceed as follows: fix $\vec t\in\F_q^n\setminus\{0\}$. For
+a uniformly random $A\in\F_q^{m\times n}$, the probability that $A\vec
+t\in\{-1,0,1\}^m$ is exactly $3^m/q^m$, since the product vector is
+uniformly distributed in $\F_q^m$. As a result, the union bound shows
+that:
+\[ \Pr_{A\overset{\$}{\gets}\F_q^{m\times n}}
+   \big[ \exists\vec t\in\F_q^m\setminus\{0\}, A\vec t\in\{-1,0,1\}^m
+\big] \leq \Big(\frac{3}{q}\Big)^m \cdot q^n \]
+since there are fewer than $q^n$ possible vectors $\vec t$.
+
+Therefore, assuming without loss of generality that $q>3$, the
+probability $\epsilon$ that the challenge has at least two solutions is
+bounded as:
+\begin{align*}
+     \epsilon &\leq \Big(\frac{3}{q}\Big)^m \cdot q^n \\
+\log \epsilon &\leq m\log\Big(\frac3q\Big) + n\log q  \\
+              &\leq n\left(1 + \frac{c}{\log
+q}\right)\log\Big(\frac3q\Big) + n\log q  \\
+              &= n\left(\log 3 - \log q + \frac{c\log 3}{\log q} - c +
+\log q\right) \\
+              &= n\big(\log 3 - c + o(1)\big)
+\end{align*}
+and since $c > \log 3$, it follows that $\epsilon$ is negligible.
+\end{proof}
+
+\subsection{Naive algorithm}
+
+From now on, we assume that the hypothesis of
+Theorem~\ref{thm:uniqueness} is satisfied. It is easy to see that the
+matrix $A$ is then of rank $n$ with overwhelming probability (indeed,
+that probability is exactly $(1-q^{-m})(1-q^{1-m})\cdots(1-q^{n-1-m})
+\geq 1-q^{n-m}$, and this can be used to deduce a ``naive'' algorithm
+for Binary-Error LWE in time $O^*(2^n)$, essentially by guessing $n$
+coefficients of the error vector $\vec e$.
+
+More precisely, since $A$ is full rank, one can assume without loss of
+generality that its first $n$ rows form an invertible square submatrix
+$A_0$. An algorithm for Binary-Error LWE is then as follows: guess the
+vector $\vec e_0\in \{0,1\}^n$ consisting of the first $n$ coefficients
+of $\vec e$; then deduce the corresponding $\vec s = A_0^{-1}(\vec
+b_0-\vec e_0)$, and check that $\vec e = \vec b - A\vec s$ is indeed in
+$\{0,1\}^m$. The check is performed in $\poly(n)$ time, and by
+Theorem~\ref{thm:uniqueness}, there is with overwhelming probability a
+unique $\vec e_0\in\{0,1\}^n$ passing this check, which corresponds to
+the unique solution $\vec s$. Trying all possibilities yields an
+algorithm in $O^*(2^n)$ time.
+
+\subsection{Arora--Ge algorithm}
+
+In a paper published at ICALP 2011, Arora and Ge proposed an algebraic
+approach to the LWE problem, which essentially amounts to expressing LWE
+as a system of \emph{polynomial} equations, and then solving that system by
+unique linearization techniques. In the case of Binary-Error LWE, the
+polynomial system is a system of multivariate \emph{quadratic} equations,
+which can be solved in polynomial time by linearization when the number
+$m$ of samples exceeds about $n^2/2$.
+
+More precisely, solving an instance $(A,\vec b)$ of the Binary-Error LWE
+problem amounts to finding a vector $\vec s\in\F_q^n$ (which we have seen
+is uniquely determined) such that for $i=1,\dots,m$, we have:
+\[ b_i - \langle\vec a_i,\vec s\rangle \in \{0,1\}, \]
+where the vectors $\vec a_i$ are the rows of $A$, and the scalars $b_i$
+the coefficients of $\vec b$. The idea of Arora and Ge is to rewrite that
+condition as:
+\[ \big(b_i - \langle\vec a_i,\vec s\rangle\big)\cdot\big(b_i -
+\langle\vec a_i,\vec s\rangle - 1\big) = 0, \]
+which is a quadratic equation in the coefficients $s_1,\dots,s_n$ of
+$\vec s$.
+
+In general, solving a multivariate quadratic system is hard. However,
+it becomes easy when many equations are available. Arora and Ge propose
+to solve this system using a simple linearization technique: replace all
+the monomials appearing in the system by a new variable.
+
+There are $\binom{n+2}{2} = (n+2)(n+1)/2$ monomials of degree at most
+$2$. Therefore, if the number of samples $m$ is at least $(n+2)(n+1)/2$,
+linearizing the quadratic system should yield a full rank linear system
+with high probability, and the secret $\vec s$ can be recovered by
+solving this linear system. This takes time
+$O\Big(\binom{n+2}{2}^\omega\Big) = O(n^{2\omega})$, and therefore
+shows that Binary-Error LWE can be solved in polynomial time given
+$m\approx n^2/2$ samples.
+
+However, many applications of LWE-like problems only give out much fewer
+than $\Theta(n^2)$ samples. For example, public-key encryption schemes
+based on LWE-like problems often have a public key consisting of $O(n\log
+q)$ samples (or in some cases, just $O(n)$ samples). It is therefore
+interesting to analyze how the complexity of Binary-Error LWE varies as
+the number of available samples decreases. This is the goal of the
+present paper: more precisely, we describe an approach to extend the
+Arora--Ge attack to arbitrarily many samples at the cost of an increased
+attack complexity.
+\section{Attacks on LWE with Non-uniform Binary Error}
+In this section, we show the attacks on LWE with non-uniform binary error. 
+In fact, we use a quite simple algorithm working as follows:
+\begin{itemize}
+  \item Step 1: Get $3n$ samples from the LWE oracle.
+  \item Step 2: Choose $2n$ samples randomly from the 3n samples got in step1.
+  \item Step 3: By assuming the $2n$ samples are all correct, solve the linear equation system.
+  \item Step 4: If failed, go back to step2. 
+\end{itemize}
+Denote $p$ as the error rate of the non-uniform binary error. We analyze two cases:
+\subsection{Case 1: $p = 1/n$}
+\begin{theorem}
+  By applying the above algorithm, non-uniform binary-error LWE with error rate $p = 1 / n$
+  can be attacked in polynomial time with $O(n)$ samples.
+\end{theorem}
+\begin{proof}
+  The probability that 2n samples are all error free is
+  \begin{gather*}
+    (1 - \frac{1}{n})^{2n}
+  \end{gather*}
+  Considering the asymptotic behaviour,
+  \begin{gather*}
+    \lim_{n\to\infty} (1 - \frac{1}{n})^{2n} = \frac{1}{e^{2}}
+   % \infty(1 - \frac{1}{n})^{2n}
+  \end{gather*}
+  which means that step2 and step3 succeeds in finding the secret vector with 
+  constant probability and the program is expected to end in polynomial time.
+\end{proof}
+\subsection{Case 2: $p = 1/n^{\alpha}$($0 < \alpha < 1$)}
+The proof for case 2 is similar.
+\begin{theorem}
+  By applying the above algorithm, non-uniform binary-error LWE with error rate $p = 1 / n^{\alpha}$($0 < \alpha < 1$)
+  can be attacked in subexponential time with $O(n)$ samples.
+\end{theorem}
+\begin{proof}
+  The probability that 2n samples are all error free is
+  \begin{align*}
+    &\lim_{n\to\infty}  (1 - \frac{1}{n^{\alpha}})^{2n}\\
+    & = \lim_{n\to\infty}  ((1 - \frac{1}{n^{\alpha}})^{n^{\alpha}})^{2\cdot n^{1 - \alpha}}\\
+    & \approx (\frac{1}{e})^{2\cdot n^{1 - \alpha}}
+  \end{align*}
+which means that we are expected to try step2 and step3 subexponential times before 
+getting the secret vector.
+\end{proof}
+\section{Hardness of LWE with Non-uniform Binary Error}
+In this section we prove the hardness of Non-uniform Binary Error. 
+We proceed similarly to ~\cite{micciancio2013hardness}, by using the standard LWE assumption to 
+construct a lossy family of functions with respect to the non-uniform input distribution. 
+\subsection{Construction of Lossy Function Family}
+The basic idea of ~\cite{micciancio2013hardness} is as follows:
+\begin{itemize}
+  \item Construct two indistinguishable function families $\mathcal{F}$ = SIS$(m, m - n, q)$ and 
+  $\mathcal{L} = $ SIS$(l, m - n, q)$ $\circ$ $\mathcal{I}(m, l, \mathcal{Y})$, where $\circ$ means
+  the composition of two functions.
+  \item Prove $(\mathcal{L}, \mathcal{X})$ is uninvertible with respect to input distribution $\mathcal{X}$.
+  \item Prove $(\mathcal{F}, \mathcal{X})$ is second-preimage resistant with respect to input distribution $\mathcal{X}$.
+  \item Use the above three properties to show that $(\mathcal{L},\mathcal{F}, \mathcal{X})$ is a lossy function family.
+  \item By using Theorem~\ref{thm:lossyfunction} to show that $(\mathcal{L}, \mathcal{X})$ and $(\mathcal{F}, \mathcal{X})$ 
+  are both one-way, so SIS$(m, m - n, q)$ is one-way with respect to the input distribution $\mathcal{X}$.
+  \item By using Theorem~\ref{thm:sislwe} to show that LWE$(m, n, q)$ is one-way with respect to the input distribution $\mathcal{X}$.
+\end{itemize}
+In this construction, they first proved the one-wayness of SIS$(m, m - n, q)$, and then use the equivalence of LWE$(m, n, q)$ 
+and SIS$(m, m - n, q)$ to prove LWE$(m, n, q)$ is also one-way. There are some other work(essentially the same)~\cite{dottling2013lossy}, which directly reduces Binary-Error LWE to standard LWE without using the notation of SIS.
+In this paper, we stick to the SIS notation.
+\subsection{Bounding Statistical Uninvertibility}
+Their proof of uninvertibility gives bound of statistical adversary. For uniform error, it works well. Suppose that $f$ is a function 
+and the domain, range of $f$ is denoted as $X$, $Y$ respectively. If $y \in Y$ has several preimages, since 
+the input distribution is uniform, the adversary can not do better than random guessing one preimage, even with unbounded computation
+power. However, this is not the case for a non-uniform input distribution. Suppose that the domain of $f$ is \{0, 1, 2\} with 
+probability \{$\frac{2}{3}$, $\frac{1}{6}$, $\frac{1}{6}$\} respectively and they all map to the same image 0. Instead of 
+randomly guessing, the adversary can get some advantage by guessing the preimage with the highest conditional probability, 
+so the adversary can always output 0. If guessing randomly, the adversary only has $\frac{1}{3}$ probability of correctness,
+but if always guessing 0, the success probability becomes $\frac{2}{3}$.
+The following theorem is the uniform case for bounding uninvertibility.
+\begin{theorem}
+  \label{uniformbound}
+  Let $\mathcal{L}$ be a family of functions on a common domain $X$, and let $\mathcal{X} = U(X)$ the uniform input 
+  distribution over $X$. Then $(\mathcal{L}, \mathcal{X})$ is $\epsilon$-uninvertible(even statistically, with respect to 
+  computationally unbounded adversaries) for $\epsilon=\mathbb{E}_{f \leftarrow \mathcal{L}}[|f(X)| ] /| X |$.
+    \end{theorem}
+    \begin{proof}
+        Choose a function $f$ and random input $x \in X$. Denote $ y = f(x)$, suppose that 
+        $y$ has $t$ preimages in the domain $X$. Since the input distribution is uniform,
+        the conditional distribution given $y$ is also uniform, so the adversary can not 
+        do better than randomly guessing one preimage. The success probability of the adversary is bounded by 1/t.
+        Thus the total success probability is bounded by
+        \begin{gather*}
+          \sum_{y \in f(X)} \frac{\left|f^{-1}(y)\right|}{|X|} \cdot \frac{1}{\left|f^{-1}(y)\right|}=\frac{|f(X)|}{|X|}
+        \end{gather*}
+    \end{proof}
+However, if applying this proof to non-uniform input distribution, things become more complicated. Since we can't do 
+more assumptions for the function $f$,
+
+\iffalse
+\section{Macaulay matrix method}
+
+\subsection{Hilbert's Nullstellensatz for Arora--Ge}
+
+Slightly informally, Hilbert's Nullstellensatz essentially states that
+the ideal generated by a family of polynomials
+$f_1,\dots,f_m\in\F_q[X_1,\dots,X_n]$ coincides with the ideal of
+polynomials that vanish on the set $V(f_1,\dots,f_m)$ of solutions of the
+polynomial system:
+\[ f_1(x_1,\dots,x_n) = \cdots = f_m(x_1,\dots,x_n) = 0. \]
+
+Now consider the application of Hilbert's Nullstellensatz to the
+polynomial system arising from Arora and Ge's approach to
+Binary-Error LWE. That system is of the form:
+\[ \left\{
+   \begin{aligned}
+   f_1(s_1,\dots,s_n) &= 0 \\
+   &\ \,\vdots \\
+   f_m(s_1,\dots,s_n) &= 0
+   \end{aligned}
+   \right.
+\]
+where $f_1,\dots,f_m\in\F_q[X_1,\dots,X_n]$ are known quadratic
+polynomials. By Theorem~\ref{thm:uniqueness}, the set $V(f_1,\dots,f_m)$
+of solutions of that system is reduced to a single point:
+\[ V(f_1,\dots,f_m) = \big\{ (s_1,\dots,s_n) \big\} = \big\{\vec s\big\},
+\]
+namely, the unique solution of the Binary-Error LWE problem. It
+follows\footnote{We are sweeping two technicalities under the rug. First,
+the set of solutions considered in the Nullstellensatz should really be
+computed over the algebraic closure of the base field; however, it is
+easy to see that the argument of Theorem~\ref{thm:uniqueness} applies
+similarly to show uniqueness even for solutions on extensions of $\F_q$.
+Second, the Nullstellensatz actually describes the \emph{radical} of the
+ideal $(f_1,\dots,f_m)$, but it is clear that this ideal is already
+radical with overwhelming probability.}
+that the ideal $I = (f_1,\dots,f_m)\subset \F_q[X_1,\dots,X_n]$ generated
+by the polynomials $f_i$ coincides with the ideal of polynomial functions
+vanishing on $\big\{\vec s\big\}$, which is just
+$(X_1-s_1,\dots,X_n-s_n)$.
+ 
+
+\subsection{Macaulay matrix}
+\begin{definition}{Macaulay matrix}
+%Let $f _ { 1 } , \dots , f _ { m } \in \mathbb { Z } _ { q } \left[ x _ { 1 } , \ldots , x _ { n } \right]$
+Let $f _ { 1 } , \ldots , f _ { m } \in Z _ { q } \left[ x _ { 1 } , \ldots , x _ { n } \right]$
+The Macaulay matrix M of degree d is defined as: list "horizontally" all the degree d monomials from smallest to largest sorted by some fixed admissible monomial ordering. The smallest monomial comes last. Multiply each $f_{i}$ by all monomials $t_{i,j}$ of degree $d-d_{i}$ where $d_{i} = deg{f_{i}}$. Finally, construct the coefficient matrix.
+\end{definition}
+\begin{theorem}
+Let $\mathbf { f } = \left( f _ { 1 } , \dots , f _ { m } \right) \in \left( Z _ { q } \left[ x _ { 1 } , \ldots , x _ { n } \right] \right) ^ { m }$
+and $<$ be a monomial ordering. There exists a positive integer D for which
+Gaussian elimination on all $M = \left( f _ { 1 } , \ldots , f _ { m } \right)$ matrices
+for d, $1\le d\le D$ computes Gr\"{o}bner basis of $\left\langle f _ { 1 } , \dots , f _ { m } \right\rangle$
+w.r.t $<$. The degree D is called the degree of regularity of $f _ { 1 } , \ldots , f _ { m }$.
+\end{theorem}
+Suppose that we have a system of polynomials equations:
+\begin{gather*}
+ f _ { 1 }(s_{1}, s_{2}\cdots s_{n})=0 \\
+  f _ { 2 }(s_{1}, s_{2}\cdots s_{n})=0\\ 
+  \ldots \\ 
+ f _ { m }(s_{1}, s_{2}\cdots s_{n})=0
+ \end{gather*}
+ where $(s_{1}, s_{2}\cdots s_{n})$ are the unknown variables that correspond to the components of secret key s. Then we can multiply these equations with any monomials degree less than a particular number D, getting more equations. For instance, if D=1, we can multiply these equations with $s_{1}, s_{2}\cdots s_{n}$:
+   \begin{gather*}
+ s_{1}\times f _ { 1 }(s_{1}, s_{2}\cdots s_{n})=0 \\
+   s_{1}\times f _ { 2 }(s_{1}, s_{2}\cdots s_{n})=0\\ 
+  \ldots \\ 
+  s_{1}\times f _ { m }(s_{1}, s_{2}\cdots s_{n})=0\\
+   \ldots \\
+    s_{n}\times f _ { 1 }(s_{1}, s_{2}\cdots s_{n})=0 \\
+   s_{n}\times f _ { 2 }(s_{1}, s_{2}\cdots s_{n})=0\\ 
+  \ldots \\ 
+  s_{n}\times f _ { m }(s_{1}, s_{2}\cdots s_{n})=0\\
+ \end{gather*}
+After getting  ${n + D}\choose {n}$equations, in a similar way with Arora-Ge algorithm, we do linearization, make new variables for each monomial and solve the new system of linear equations. The only question left is that how could we guarantee that after linearization, there is a unique solution. In other words, we need to determine D.
+\subsection{Hilbert’s Nullstellensatz}
+Given some polynomials $f _ { 1 } , \dots , f _ { m } \in \mathcal { K } \left[ x _ { 1 } , \dots , x _ { n } \right]$, The Consistency Question is: Does the system of these polynomial equations, say
+\begin{gather*}
+S = \left\{ \begin{array} { l } { f _ { 1 } = 0 } \\ { f _ { 2 } = 0 } \\ { \cdots } \\ { f _ { m } = 0 } \end{array} \right.
+\end{gather*}
+has a solution in $\mathcal{K}$? HN helps in answering this question. In its weak form, also known as Weak Hilbert’s Nullstellensatz (WHN), it gives us a certificate when this system has no solution.
+\begin{theorem}
+Let $f _ { 1 } , \dots , f _ { m } \in \mathcal { K } \left[ x _ { 1 } , \dots , x _ { n } \right]$,
+then the system
+\begin{gather*}
+S = \left\{ \begin{array} { l } { f _ { 1 } = 0 } \\ { f _ { 2 } = 0 } \\ { \cdots } \\ { f _ { m } = 0 } \end{array} \right.
+\end{gather*}
+will have no solution in $\mathcal{K}$ iff $\exists g _ { 1 } , g _ { 2 } , \ldots , g _ { m }$$ \in \mathcal { K } \left[ x _ { 1 } , \ldots , x _ { n } \right]$ such that $\sum _ { i = 1 } ^ { m } f _ { i } g _ { i } = 1$.
+\end{theorem}
+Besides, from Hilbert’s Nullstellensatz, we can know that if given large enough D, which we mentioned previously, the new system of equations that we construct by multiplication will have one unique solution.
+\subsection{Semi-regularity}
+It turns out that if assuming semi-regularity, we have a good formula for D.
+Let $m > n$, and $f _ { 1 } , \ldots , f _ { m } \in Z _ { q } \left[ x _ { 1 } , \dots , x _ { n } \right]$ be homogeneous polynomials of degree $d _ { 1 } , \dots , d _ { m }$ respectively and I the ideal
+generated by these polynomials. The system is called to be a semi-regular system if the Hilbert series w.r.t the grevlex order
+$H _ { I } ( z ) = \left[ \frac { \prod _ { i = 1 } ^ { m } \left( 1 - z ^ { d _ { i } } \right) } { ( 1 - z ) ^ { n } } \right] _ { + }$, where $[S]_{+}$ denotes the series obtained by truncating S before the index of its first non-positive coefficient.
+\section{Gr\"{o}bner basis} 
+Although we don't really use Gr\"{o}bner basis in our analysis, our method is, in some way, essentially similar with Gr\"{o}bner basis. Therefore, we also give a short introduction to Gr\"{o}bner basis here.
+\subsection{Gr\"{o}bner basis}
+Gr\"{o}bner basis is a very useful and fundamental tool in commutative algebra to solve a system of non-linear polynomial equations over a finite field. We consider polynomials in $K[x]=K[x_{1},x_{2}....x_{n}]$.
+\theoremstyle{definition}
+\begin{definition}{}
+A Gr\"{o}bner basis of an ideal $I \subset K [ \mathbf { x } ]$ for a given 
+monomial ordering is a finite set $B \subset \mathcal { I }$ such that any $f \in \mathcal { J }$ reduces to 0 by $B$. The basis is called reduced when the $f _ { i } ^ { \prime } s$ all have leading coefficient 1 and when none of the $f _ { i } ^ { \prime } s$ involves a monomial which reduces by $B \backslash \left\{ f _ { i } \right\}$. 
+\end{definition}
+
+\subsection{Complexity of computing a Gr\"{o}bner basis}
+The complexity of computing a Gr\"{o}bner basis is bounded by the complexity of
+performing Gaussian elimination on the Macaulay matrix in some degree $D$.
+There are several algorithms of computing a Gr\"{o}bner basis with degree of regularity, such as Buchberger algorithm, $F_{4}$,$F_{5}$ algorithm\cite{faugere1999new,buchberger1982computer}.
+The complexity of computing a Gr\"{o}bner basis would be:\\
+$O \left( \left( \begin{array} { c } { n + d } \\ { d } \end{array} \right) ^ { \omega } \right)$,
+where $2\le \omega < 3$ is the linear algebra constant, and $d$ is the degree of semi-regularity of the system.\\
+Generally speaking, it is very difficult to compute the degree of regularity of a polynomial system. But there is  a good formula when assuming semi-regularity of the polynomial system.
+\section{Arora-Ge attack with Macaulay matrix method on Binary-Error LWE}
+Recall that solving LWE is actually equivalent to computing a Gr\"{o}bner basis\cite{albrecht2014algebraic} for a system of polynomials. Besides, the complexity of computing a Gr\"{o}bner basis would be:
+$O \left( \left( \begin{array} { c } { n + d } \\ { d } \end{array} \right) ^ { \omega } \right)$,
+where $2\le \omega < 3$ is the linear algebra constant, and $d$ is the degree of semi-regularity of the system. Therefore, in order to estimate the time complexity of Binary-Error LWE attack, we only need to compute $d_{reg}$ for this polynomial system.
+\begin{theorem}\cite{bardet2005asymptotic}
+For $m = n + k$ ($k > 1$ fixed) quadratic equations in n variables, the degree of
+regularity $d_{reg}$ behaves asymptotically like
+\begin{equation}
+d _ { r e g } \sim \frac { m } { 2 }
+\end{equation}
+The time complexity for Binary-Error LWE would be
+$O \left( \left( \begin{array} { c } { n + \frac { m } { 2 } } \\ { \frac { m } { 2 } } \end{array} \right) ^ { \omega } \right)$, which is not in polynomial time.
+\end{theorem}
+\begin{theorem}
+For m = $\epsilon$$n^{2}$ ( $\epsilon$ is a constant) quadratic equations in n variables, the degree of
+regularity $d_{reg}$ behaves asymptotically like
+\begin{equation}
+d _ { r e g } \sim \frac { 1 } { 8\epsilon }
+\end{equation}
+The time complexity for Binary-Error LWE would be
+$O \left( \left( \begin{array} { c } { n + \frac { 1 } { 8\epsilon } } \\ { \frac { 1 } { 8\epsilon } } \end{array} \right) ^ { \omega } \right)$, which is in polynomial time.
+\end{theorem}
+\begin{theorem}
+For m = $n^{1+\alpha}$ ( $\alpha$ is a constant between 0 and 1) quadratic equations in n variables, the degree of
+regularity $d_{reg}$ behaves asymptotically like
+\begin{equation}
+d _ { r e g } \sim \frac { 1 } { 8  }n^{1 -\alpha}
+\end{equation}
+The time complexity for Binary-Error LWE would be
+$O \left( \left( \begin{array} { c } { n + \frac { 1 } { 8  }n^{1 -\alpha} } \\ {\frac { 1 } { 8  }n^{1 -\alpha} } \end{array} \right) ^ { \omega } \right)$, which means that when $\alpha$ is smaller, the time complexity grows larger.
+\end{theorem}
+In the next section, we are going to prove these first two theorems. The third theorem is quite similar, which we will not give the proof here.
+\section{Proof}
+\subsection{Case m = n + k(k is a constant)}
+\begin{proof}
+Denote $h_{d}$ as the d-th coefficient of Hilbert series.\\
+\begin{equation}  \mathrm {H}_{m,n} ( z ) = \frac { \left( 1 - z ^ { 2 } \right) ^ { m } } { ( 1 - z ) ^ { n } } = \sum _ { d = 0 } ^ { \infty } h _ { d } z ^ { d } \end{equation}
+where the integration path enclose the origin and there are no other singularity of $H_{m,n}(z)$.
+Take d-th derivative for equation $(1)$ and using Cauchy Integral formula for derivatives, we can get
+\begin{equation} \mathcal { I } _ { n } ( d )  = \frac { 1 } { 2i \pi } \oint H _ { m , n } ( z ) \frac { d z } { z ^ { d + 1 } } = \frac { 1 } { 2i \pi } \oint e ^ { n f ( z ) } d z \end{equation}
+Then write the equation in another way
+\begin{equation} 
+\mathcal { I } _ { n } ( d ) = \frac { 1 } { 2i \pi } \oint \underbrace { ( 1 - z ) ^ { m - n } } _ { g ( z ) } \underbrace { ( 1 + z ) ^ { m } z ^ { - d - 1 } } _ { F ( z ) = e ^ { n f ( z ) } } d z
+\end{equation}
+\begin{equation} 
+\mathcal { I } _ { n } ( d ) =\frac { 1 } { 2i \pi }\oint g (z) e ^ { n f ( z ) } dz
+\end{equation}
+Then we get
+\begin{equation} 
+f ^ { \prime } ( z ) = \frac { m } { 1 + z } - \frac { d + 1 } { z }
+\end{equation}
+The saddle point is
+\begin{equation} z _ { 0 } = \frac { 1 } { \frac { m } { d + 1 } - 1 } \end{equation}
+The approximation is
+\begin{equation}
+\mathcal { I } _ { n } ( d ) \sim \frac { \left( 1 + z _ { 0 } \right) ^ { m + 1 } \left( 1 - z _ { 0 } \right) ^ { m - n } } { \sqrt { 2 \pi } z _ { 0 } ^ { d + 1 / 2 } m ^ { 1 / 2 } }
+\end{equation}
+It vanishes only if $z_{0}=1$, i.e.
+\begin{equation}
+d _ { r e g } \sim \frac { m } { 2 }
+\end{equation}
+\end{proof}
+\subsection{Case m = $\epsilon$$n^{2}$ ( $\epsilon$ is a constant)}
+\begin{proof}
+Denote $h_{d}$ as the d-th coefficient of Hilbert series.\\
+\begin{equation}  \mathrm {H}_{m,n} ( z ) = \frac { \left( 1 - z ^ { 2 } \right) ^ { m } } { ( 1 - z ) ^ { n } } = \sum _ { d = 0 } ^ { \infty } h _ { d } z ^ { d } \end{equation}
+where the integration path enclose the origin and there are no other singularity of $H_{m,n}(z)$.
+Take d-th derivative for equation $(1)$ and using Cauchy Integral formula for derivatives, we can get
+\begin{equation} \mathcal { I } _ { n } ( d )  = \frac { 1 } { 2i \pi } \oint H _ { m , n } ( z ) \frac { d z } { z ^ { d + 1 } } = \frac { 1 } { 2i \pi } \oint e ^ { n f ( z ) } d z \end{equation}
+Then determine $f(z)$
+\begin{equation} 
+\mathcal { I } _ { n } ( d ) = e ^ { n f ( z ) } d z = \frac { 1 } { 2 i \pi } \oint g ( z ) e ^ { n f ( z ) } d z
+\end{equation}
+Then we get
+\begin{equation} 
+e ^ { n f ( z ) } = \frac { ( 1 - z ) ^ { m + n } ( 1 + z ) ^ { m } } { z ^ { d + 1 } }
+\end{equation}
+Then we get $f(z)$
+\begin{equation} 
+n f ( z ) = ( m - n ) \log ( 1 - z ) + m \log ( 1 + z ) - ( d + 1 ) \log z
+\end{equation}
+Compute $f ^ { \prime } ( z )$
+\begin{equation} 
+n f ^ { \prime } ( z ) = \frac { n - m } { 1 - z } + \frac { m } { 1 + z } - \frac { d + 1 } { z }
+\end{equation}
+Let $f ^ { \prime } ( z )$ = 0
+\begin{equation}
+( n - 2 m + d + 1 ) z ^ { 2 } + n z - ( d + 1 ) = 0
+\end{equation}
+If $\Delta$ of this equation is not zero, it means that there are two distinct saddle points. The contribution of these two saddle points to the integral are conjugate values whose sum does not vanish. Hence the two saddle points must be identical, which means that $\Delta = 0$
+\begin{equation}
+\Delta = 4 ( d + 1 ) ^ { 2 } + 4 ( n - 2 m ) ( d + 1 ) + n ^ { 2 } = 0
+\end{equation}
+Solving this equation, we get 
+\begin{equation}
+d + 1 = m - \frac { n } { 2 } - \sqrt { m ( m - n ) }
+\end{equation}
+Substitute m = $\epsilon$$n^{2}$
+\begin{equation}
+d + 1  = \epsilon n ^ { 2 } - \frac { n } { 2 } - \epsilon n ^ { 2 } \sqrt { 1 - \frac { 1 }{ \epsilon n } }
+\end{equation}
+Using taylor expansion
+\begin{equation}
+d+1 \sim \frac{1}{8\epsilon}
+\end{equation}
+\end{proof}
+\fi
+
+\section{Conclusion}
+Assuming semi-regularity, we get a concrete time analysis for Binary-Error LWE. The trade-off between time and samples can help us understand the hardness of Binary-Error LWE better. Hence, when building cryptographic schemes, we should consider the relation between time complexity and sample complexity before choosing security parameters. 
+%\begin{thebibliography}{9}
+%\bibitem{a}
+%Authors, ``Title,'' {\em Journal}, Pages, etc...
+%\bibitem{b}
+%Authors, {\em Book title}, Publisher, Year, etc...
+%\end{thebibliography}
+\bibliographystyle{plain}
+\bibliography{ref} 
+\end{document}
+% end of file
