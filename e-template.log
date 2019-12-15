@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.5.25)  15 DEC 2019 13:09
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.5.25)  15 DEC 2019 21:30
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -257,7 +257,12 @@ Overfull \hbox (4.50336pt too wide) in paragraph at lines 489--492
 \OT1/cmr/m/n/10 sta-tis-ti-cally, with re-spect to com-pu-ta-tion-ally un-bounded
  []
 
-[4] (/Users/admin/Desktop/SCIS 2020/e-template.bbl
+[4]
+Overfull \hbox (5.42947pt too wide) in paragraph at lines 534--536
+\OMS/cmsy/m/n/10 F \OT1/cmr/m/n/10 =$ SIS$(\OML/cmm/m/it/10 m; m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 n; q\OT1/cmr/m/n/10 )$ and $\OMS/cmsy/m/n/10 L \OT1/cmr/m/n/10 =$SIS$(\OML/cmm/m/it/10 l; m \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 n; q\OT1/cmr/m/n/10 )$ $\OMS/cmsy/m/n/10 ^^N$ $I\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 m; l; \OMS/cmsy/m/n/10 Y\OT1/cmr/m/n/10 )$.
+ []
+
+(/Users/admin/Desktop/SCIS 2020/e-template.bbl
 Underfull \hbox (badness 8151) in paragraph at lines 15--20
 []\OT1/cmr/m/n/10 Johannes Buch-mann, Flo-rian G^^?opfert, Tim
  []
@@ -276,9 +281,9 @@ Here is how much of TeX's memory you used:
  7215 multiletter control sequences out of 15000+600000
  12169 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 27i,12n,32p,395b,242s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 27i,12n,32p,392b,242s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on "/Users/admin/Desktop/SCIS 2020/e-template.pdf" (5 pages, 246843 bytes).
+Output written on "/Users/admin/Desktop/SCIS 2020/e-template.pdf" (5 pages, 251985 bytes).
 PDF statistics:
  100 PDF objects out of 1000 (max. 8388607)
  72 compressed objects within 1 object stream

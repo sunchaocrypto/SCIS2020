@@ -1,14 +1,14 @@
 # Fdb version 3
-["bibtex e-template"] 1576382812 "e-template.aux" "e-template.bbl" "e-template" 1576394682
+["bibtex e-template"] 1576412683 "e-template.aux" "e-template.bbl" "e-template" 1576413050
   "/usr/local/texlive/2018/texmf-dist/bibtex/bst/base/plain.bst" 1480098433 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "e-template.aux" 1576382941 2510 43156b2939ec6abbf92cc3bed1c7d952 ""
+  "e-template.aux" 1576413025 2681 bf9c5bdff109e03f076ca4e5d18b36b3 ""
   "ref.bib" 1576382809 5552 3b0810974a341c8cf359e11ed62136ee ""
   (generated)
   "e-template.bbl"
   "e-template.blg"
-["pdflatex"] 1576382940 "/Users/admin/Desktop/SCIS 2020/e-template.tex" "/Users/admin/Desktop/SCIS 2020/e-template.pdf" "e-template" 1576394682
-  "/Users/admin/Desktop/SCIS 2020/e-template.aux" 1576382941 2510 43156b2939ec6abbf92cc3bed1c7d952 ""
-  "/Users/admin/Desktop/SCIS 2020/e-template.tex" 1576394681 42014 d8aeae75c659c513bd865e8f405a276d ""
+["pdflatex"] 1576413024 "/Users/admin/Desktop/SCIS 2020/e-template.tex" "/Users/admin/Desktop/SCIS 2020/e-template.pdf" "e-template" 1576413050
+  "/Users/admin/Desktop/SCIS 2020/e-template.aux" 1576413025 2681 bf9c5bdff109e03f076ca4e5d18b36b3 ""
+  "/Users/admin/Desktop/SCIS 2020/e-template.tex" 1576413050 29915 50858942b21e610a3e19dff4b70efc0f ""
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -83,13 +83,13 @@
   "/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1530786793 2717033 f61a5287d9c22a39a74f1979fe3f905c ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1527235506 4220280 6b79458f3702eb8890942b70824f7f05 ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
-  "e-template.aux" 1576382941 2510 43156b2939ec6abbf92cc3bed1c7d952 ""
-  "e-template.bbl" 1576382812 2270 fa6fd0191499d27ca4010a1bdccbfb76 "bibtex e-template"
-  "e-template.tex" 1576394681 42014 d8aeae75c659c513bd865e8f405a276d ""
+  "e-template.aux" 1576413025 2681 bf9c5bdff109e03f076ca4e5d18b36b3 ""
+  "e-template.bbl" 1576412684 2270 fa6fd0191499d27ca4010a1bdccbfb76 "bibtex e-template"
+  "e-template.tex" 1576413050 29915 50858942b21e610a3e19dff4b70efc0f ""
   "scis2020e.sty" 1557222514 3472 7bfd90418efb5c0a0893aaa3e3a7f311 ""
   (generated)
   "e-template.pdf"
-  "/Users/admin/Desktop/SCIS 2020/e-template.log"
-  "/Users/admin/Desktop/SCIS 2020/e-template.pdf"
-  "e-template.aux"
   "e-template.log"
+  "/Users/admin/Desktop/SCIS 2020/e-template.log"
+  "e-template.aux"
+  "/Users/admin/Desktop/SCIS 2020/e-template.pdf"
